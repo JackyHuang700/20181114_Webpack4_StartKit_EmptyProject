@@ -1,4 +1,5 @@
 import printMe from './print'
+import '../scss/main.scss'
 import '../css/styles.css'
 import {
   cube,

@@ -5,7 +5,7 @@ const {
   osCpusLength,
   commonInclude,
   commonExclude,
-  modeProduction,
+  modeProduction
 } = require('./webpack.define.js')
 const common = require('./webpack.common.js')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
@@ -34,7 +34,38 @@ module.exports = merge(common, {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [require('autoprefixer')("last 100 versions") /*在这里添加*/]
+              plugins: [
+                require('autoprefixer')('last 100 versions') /*在这里添加*/
+              ]
+            }
+          }
+        ]
+      },
+      {
+        test: /\.scss$/,
+        include: [commonInclude],
+        exclude: [commonExclude],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader', // 将 CSS 转化成 CommonJS 模块
+
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                require('autoprefixer')('last 100 versions') /*在这里添加*/
+              ]
+            }
+          },
+          {
+            loader: 'sass-loader', // 将 Sass 编译成 CSS
+            options: {
+              sourceMap: true
             }
           }
         ]
