@@ -2,7 +2,6 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const DashboardPlugin = require('webpack-dashboard/plugin')
 // 專門給 webpack-hot-middleware 用的
 const webpackhotMiddleware = 'webpack-hot-middleware/client?reload=true'
@@ -21,6 +20,11 @@ module.exports = merge(common, {
   entry: getNewCommonEntry(common),
   output: {
     filename: '[name].bundle.js'
+  },
+  // 给定一个创建后超过 250kb 的资源， webpack 抛出一个错误或警告
+  performance: {
+    // hints: 'error'
+    // hints: 'warning'
   },
   module: {
     rules: [
@@ -51,23 +55,27 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(modeDevelopment)
     }),
-    new BundleAnalyzerPlugin(),
     // 这个插件的作用是在热加载时直接返回更新文件名，而不是文件的id。
     new webpack.NamedModulesPlugin(),
   ],
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
+  devtool: 'cheap-module-eval-source-map',
   devServer: {
+    // contentBase
     // contentBase: [
-    //   path.join(__dirname, "wwwroot/webpackTest")
+    //   path.join(__dirname, "wwwroot")
     // ], //静态文件根目录
     // contentBase 這個要了解，要再加上
     // contentBase: [path.join(__dirname, 'wwwroot')],
     // contentBase: path.resolve(__dirname, 'wwwroot'),
     // contentBase: '/wwwroot/',
     // contentBase: '/wwwroot/webpackTest/',
+    // contentBase
+    // publicPath
     // publicPath: '/wwwroot/',
     // publicPath: '/wwwroot/webpackTest/',
-    publicPath: '/',
+    publicPath: common.output.publicPath,
+    // publicPath
     // proxy: {
     //   '*': {
     //     target: devServerProxyTarget,
@@ -75,7 +83,10 @@ module.exports = merge(common, {
     //   }
     // },
     // 当出现编译器错误或警告时，在浏览器中显示全屏覆盖层。默认禁用。如果你想要只显示编译器错误
-    overlay: true,
+    overlay: {
+      warnings: true,
+      errors: true
+    },
     port: devServerPort,
     inline: true,
     hot: true,
@@ -83,14 +94,19 @@ module.exports = merge(common, {
     hotOnly: true,
     open: true,
     host: 'localhost',
-    compress: false // 服务器返回浏览器的时候是否启动gzip压缩
+    // 服务器返回浏览器的时候是否启动gzip压缩
+    compress: false, 
+    // index: 'index.html'
+    // openPage: '/different/page',
+    // 告知服务器，观察 devServer.contentBase 下的文件。文件修改后，会触发一次完整的页面重载
+    watchContentBase: true,
   },
-  // watch: true, // 开启监听文件更改，自动刷新
+  watch: true, // 开启监听文件更改，自动刷新
   watchOptions: {
-      ignored: /node_modules/, //忽略不用监听变更的目录
+      ignored: ['node_modules'], //忽略不用监听变更的目录
       aggregateTimeout: 500, //防止重复保存频繁重新编译,500毫米内重复保存不打包
       poll:1000 //每秒询问的文件变更的次数
-  },
+  }
 })
 
 // 添加HMR伺服器

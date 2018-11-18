@@ -46,7 +46,7 @@ module.exports = {
         test: /\.tsx?$/,
         include: [commonInclude],
         exclude: [commonExclude],
-        use: 'ts-loader'
+        use: ['ts-loader']
       },
 
       {
@@ -97,7 +97,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: false,
       template: path.resolve(__dirname, 'ClientApp/indexTemplate.html'),
-      // template: path.resolve(__dirname, 'Views/Shared/_LayoutTemplate.cshtml'),
       filename: path.resolve(__dirname, 'index.html'),
       chunks: ['index'],
       // 跳過那些模塊
@@ -105,7 +104,7 @@ module.exports = {
       HtmlWebpackPluginOverride: true,
       // hash:true,//防止缓存
       outputFile: {
-        vendor: '~/wwwroot/vendor/dll.vendor.js',
+        vendor: '/wwwroot/vendor/dll.vendor.js',
         isProd: false,
         port: devServerPort,
       },
@@ -135,6 +134,12 @@ module.exports = {
     ]),
     // new webpack.ProvidePlugin({
     //   _: 'lodash' //所有页面都会引入 _ 这个变量，不用再import引入
+    //   $: "jquery",
+    //   jQuery: "jquery"
     // })
-  ]
+  ],
+  stats: {
+     // `webpack --colors` 等同于
+     colors: true,
+  }
 }
