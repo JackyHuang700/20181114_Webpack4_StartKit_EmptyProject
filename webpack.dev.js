@@ -61,7 +61,7 @@ module.exports = merge(common, {
   // devtool: 'inline-source-map',
   devtool: 'cheap-module-eval-source-map',
   devServer: {
-    // contentBase
+    // -- contentBase --
     // contentBase: [
     //   path.join(__dirname, "wwwroot")
     // ], //静态文件根目录
@@ -70,7 +70,7 @@ module.exports = merge(common, {
     // contentBase: path.resolve(__dirname, 'wwwroot'),
     // contentBase: '/wwwroot/',
     // contentBase: '/wwwroot/webpackTest/',
-    // contentBase
+    //  -- contentBase --
     // publicPath
     // publicPath: '/wwwroot/',
     // publicPath: '/wwwroot/webpackTest/',
