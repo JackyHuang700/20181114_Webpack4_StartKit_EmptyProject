@@ -104,7 +104,7 @@ module.exports = {
       HtmlWebpackPluginOverride: true,
       // hash:true,//防止缓存
       outputFile: {
-        vendor: '/wwwroot/vendor/dll.vendor.js',
+        vendor: 'wwwroot/vendor/dll.vendor.js',
         isProd: false,
         port: devServerPort,
       },

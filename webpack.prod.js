@@ -109,7 +109,7 @@ module.exports = merge(common, {
         safe: true,
         // cssnano 集成了autoprefixer的功能
         // 会使用到autoprefixer进行无关前缀的清理
-        // 关闭autoprefixer功能
+        // 关闭autoprefixer功能 microSDXC
         // 使用postcss的autoprefixer功能
         // autoprefixer: { disable: true }, // 这里是个大坑，稍后会提到
         mergeLonghand: false,
@@ -131,8 +131,8 @@ module.exports = merge(common, {
         sourceMap: true,
         parallel: osCpusLength - 1,
         cache: true,
-        // include: /\/includes/,
-        // exclude: /\/excludes/,
+        include: /\/includes/,
+        exclude: /\/excludes/,
         uglifyOptions: {
           ie8: true,
           compress: {
