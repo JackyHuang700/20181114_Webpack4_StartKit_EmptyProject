@@ -24,6 +24,7 @@
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
     "csv-loader": "^3.0.2",
+    "ejs-loader": "^0.3.1",
     "express": "^4.16.4",
     "file-loader": "^2.0.0",
     "happypack": "^5.0.0",

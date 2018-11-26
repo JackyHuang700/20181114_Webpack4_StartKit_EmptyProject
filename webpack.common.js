@@ -41,6 +41,11 @@ module.exports = {
           // }
         }
       },
+      // 注意2：虽然html-webpack-plugin会默认解析ejs语法，但我测试的时候无法解析导入的侧栏、头部、底部的模板
+      {
+        test: /\.ejs$/,
+        loader: 'ejs-loader?variable=data'
+      },
       {
         // 使用 ts-loader 时，设置 happyPackMode: true / transpileOnly: true
         test: /\.tsx?$/,
@@ -92,7 +97,7 @@ module.exports = {
           //   presets: ['@babel/preset-env']
           // }
         }
-      ],
+      ]
     }),
     new HtmlWebpackPlugin({
       inject: false,
@@ -106,11 +111,16 @@ module.exports = {
       outputFile: {
         vendor: 'wwwroot/vendor/dll.vendor.js',
         isProd: false,
-        port: devServerPort,
+        port: devServerPort
       },
       minify: true,
       // 啟用手動排序
-      chunksSortMode: 'manual',
+      chunksSortMode: 'manual'
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['index'],
+      template: path.resolve(__dirname, 'ClientApp/ejs/index_2.ejs'),
+      filename: path.resolve(__dirname, 'index_2.html'),
     }),
     new webpack.DllReferencePlugin({
       manifest: require('./wwwroot/vendor/vendor.manifest.json')
@@ -131,7 +141,7 @@ module.exports = {
         to: path.resolve(__dirname, `wwwroot/cpoyVendor/cpoyVendorTwo`),
         toType: 'dir'
       }
-    ]),
+    ])
     // new webpack.ProvidePlugin({
     //   _: 'lodash' //所有页面都会引入 _ 这个变量，不用再import引入
     //   $: "jquery",
@@ -139,7 +149,7 @@ module.exports = {
     // })
   ],
   stats: {
-     // `webpack --colors` 等同于
-     colors: true,
+    // `webpack --colors` 等同于
+    colors: true
   }
 }
