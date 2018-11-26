@@ -3,7 +3,9 @@ const jsonServer = require('json-server')
 const server = jsonServer.create()
 const router = jsonServer.router(path.join(__dirname, 'db.json'))
 const middlewares = jsonServer.defaults()
-const port = 44385
+const {
+  devProxyPort
+} = require('../webpack.define.js')
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares)
@@ -47,7 +49,7 @@ server.use(jsonServer.rewriter({
 
 // Use default router
 server.use(router)
-server.listen(port, () => {
+server.listen(devProxyPort, () => {
   console.log('JSON Server is running')
 })
 

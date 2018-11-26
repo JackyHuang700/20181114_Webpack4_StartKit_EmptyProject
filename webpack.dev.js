@@ -75,7 +75,6 @@ module.exports = merge(common, {
     // publicPath: '/wwwroot/',
     // publicPath: '/wwwroot/webpackTest/',
     publicPath: common.output.publicPath,
-    // publicPath
     // proxy: {
     //   '*': {
     //     target: devServerProxyTarget,

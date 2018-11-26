@@ -7,8 +7,8 @@
     "dll": "webpack --config webpack.dll.js",
     "watch": "webpack --mode development --watch",
     "dev": "webpack  --watch --config webpack.dev.js",
-    "dev:server": "webpack-dashboard -- webpack-dev-server --config webpack.dev.js",
-    "dev:middle": "webpack-dashboard -- node server.js",
+    "dev:server": "webpack-dashboard -- webpack-dev-server --config webpack.dev.js | npm run jsonServer",
+    "dev:middle": "webpack-dashboard -- node server.js | npm run jsonServer",
     "prod": "webpack --config webpack.prod.js",
     "help": "webpack --help",
     "jsonServer": "node ./JsonServer/server.js"
