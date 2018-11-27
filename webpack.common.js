@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 // happypack
 const HappyPack = require('happypack')
 const {
@@ -116,7 +117,9 @@ module.exports = {
       },
       minify: true,
       // 啟用手動排序
-      chunksSortMode: 'manual'
+      chunksSortMode: 'manual',
+      // 跟著HtmlWebpackHarddiskPlugin套件
+      alwaysWriteToDisk: true
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'ClientApp/ejs/index_2.ejs'),
@@ -131,8 +134,12 @@ module.exports = {
       },
       minify: true,
       // 啟用手動排序
-      chunksSortMode: 'manual'
+      chunksSortMode: 'manual',
+      // 跟著HtmlWebpackHarddiskPlugin套件
+      alwaysWriteToDisk: true
     }),
+    //強制HtmlWebpackPlugin進行編譯成實體檔案
+    new HtmlWebpackHarddiskPlugin(),
     new webpack.DllReferencePlugin({
       manifest: require('./wwwroot/vendor/vendor.manifest.json')
     }),
