@@ -7,8 +7,8 @@
     "dll": "webpack --config webpack.dll.js",
     "watch": "webpack --mode development --watch",
     "dev": "webpack  --watch --config webpack.dev.js",
-    "dev:server": "webpack-dashboard -- webpack-dev-server --config webpack.dev.js | npm run jsonServer",
-    "dev:middle": "webpack-dashboard -- node server.js | npm run jsonServer",
+    "dev:server": "webpack-dashboard -- webpack-dev-server --config webpack.dev.js",
+    "dev:middle": "webpack-dashboard -- node server.js",
     "prod": "webpack --config webpack.prod.js",
     "help": "webpack --help",
     "jsonServer": "node ./JsonServer/server.js"
@@ -24,6 +24,7 @@
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
     "csv-loader": "^3.0.2",
+    "ejs-compiled-loader": "^1.1.0",
     "ejs-loader": "^0.3.1",
     "express": "^4.16.4",
     "file-loader": "^2.0.0",

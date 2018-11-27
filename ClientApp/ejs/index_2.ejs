@@ -5,6 +5,13 @@
   <title>Document</title>
 </head>
 <body>
+
+    <%if (htmlWebpackPlugin.options.outputFile.isProd) {%> 
+      <% for (var css in htmlWebpackPlugin.files.css) { %>
+        <link href="wwwroot/webpackTest<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+      <% } %>
+    <% } %>
+
 <%= require('./header.ejs')() %>
   <!-- Here is our page's main content -->
   <main>
@@ -27,6 +34,15 @@
       <p>Vivamus fermentum semper porta. Nunc diam velit, adipscing ut tristique vitae sagittis vel odio. Maecenas convallis ullamcorper ultricied. Curabitur ornare, ligula semper consectetur sagittis, nisi diam iaculis velit, is fringille sem nunc vet mi.</p>
     </article>
   </main>
+
+  <script src="<%= htmlWebpackPlugin.options.outputFile.vendor %>"></script>
+
+  <%if (htmlWebpackPlugin.options.outputFile.isProd) {%> <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+  <script src="wwwroot/webpackTest<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+  <% } %> <%} else {%> <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+  <script src="http://localhost:<%= htmlWebpackPlugin.options.outputFile.port %><%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+  <% } %> <% } %>
+
 <%= require('./footer.ejs')() %>
 </body>
 </html>
