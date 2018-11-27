@@ -138,7 +138,7 @@ module.exports = {
       // 跟著HtmlWebpackHarddiskPlugin套件
       alwaysWriteToDisk: true
     }),
-    //強制HtmlWebpackPlugin進行編譯成實體檔案
+    //強制"HtmlWebpackPlugin"進行編譯成實體檔案
     new HtmlWebpackHarddiskPlugin(),
     new webpack.DllReferencePlugin({
       manifest: require('./wwwroot/vendor/vendor.manifest.json')
