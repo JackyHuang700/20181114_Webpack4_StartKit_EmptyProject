@@ -101,45 +101,45 @@ module.exports = {
         }
       ]
     }),
-    new HtmlWebpackPlugin({
-      inject: false,
-      template: path.resolve(__dirname, 'ClientApp/indexTemplate.html'),
-      filename: path.resolve(__dirname, 'index.html'),
-      chunks: ['index'],
-      // 跳過那些模塊
-      // excludeChunks: [],
-      HtmlWebpackPluginOverride: true,
-      // hash:true,//防止缓存
-      outputFile: {
-        vendor: 'wwwroot/vendor/dll.vendor.js',
-        isProd: false,
-        port: devServerPort
-      },
-      minify: true,
-      // 啟用手動排序
-      chunksSortMode: 'manual',
-      // 跟著HtmlWebpackHarddiskPlugin套件
-      alwaysWriteToDisk: true
-    }),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'ClientApp/ejs/index_2/index_2.ejs'),
-      filename: path.resolve(__dirname, 'index_2.html'),
-      chunks: ['index'],
-      HtmlWebpackPluginOverride: true,
-      // hash:true,//防止缓存
-      outputFile: {
-        vendor: 'wwwroot/vendor/dll.vendor.js',
-        isProd: false,
-        port: devServerPort
-      },
-      minify: true,
-      // 啟用手動排序
-      chunksSortMode: 'manual',
-      // 跟著HtmlWebpackHarddiskPlugin套件
-      alwaysWriteToDisk: true
-    }),
-    //強制"HtmlWebpackPlugin"進行編譯成實體檔案
-    new HtmlWebpackHarddiskPlugin(),
+    // new HtmlWebpackPlugin({
+    //   inject: false,
+    //   template: path.resolve(__dirname, 'ClientApp/indexTemplate.html'),
+    //   filename: path.resolve(__dirname, 'index.html'),
+    //   chunks: ['index'],
+    //   // 跳過那些模塊
+    //   // excludeChunks: [],
+    //   HtmlWebpackPluginOverride: true,
+    //   // hash:true,//防止缓存
+    //   outputFile: {
+    //     vendor: 'wwwroot/vendor/dll.vendor.js',
+    //     isProd: false,
+    //     port: devServerPort
+    //   },
+    //   minify: true,
+    //   // 啟用手動排序
+    //   chunksSortMode: 'manual',
+    //   // 跟著HtmlWebpackHarddiskPlugin套件
+    //   alwaysWriteToDisk: true
+    // }),
+    // new HtmlWebpackPlugin({
+    //   template: path.resolve(__dirname, 'ClientApp/ejs/index_2/index_2.ejs'),
+    //   filename: path.resolve(__dirname, 'index_2.html'),
+    //   chunks: ['index'],
+    //   HtmlWebpackPluginOverride: true,
+    //   // hash:true,//防止缓存
+    //   outputFile: {
+    //     vendor: 'wwwroot/vendor/dll.vendor.js',
+    //     isProd: false,
+    //     port: devServerPort
+    //   },
+    //   minify: true,
+    //   // 啟用手動排序
+    //   chunksSortMode: 'manual',
+    //   // 跟著HtmlWebpackHarddiskPlugin套件
+    //   alwaysWriteToDisk: true
+    // }),
+    // //強制"HtmlWebpackPlugin"進行編譯成實體檔案
+    // new HtmlWebpackHarddiskPlugin(),
     new webpack.DllReferencePlugin({
       manifest: require('./wwwroot/vendor/vendor.manifest.json')
     }),
@@ -165,9 +165,70 @@ module.exports = {
     //   $: "jquery",
     //   jQuery: "jquery"
     // })
-  ],
+  ].concat(htmlWebpackPluginSetting()),
   stats: {
     // `webpack --colors` 等同于
     colors: true
   }
+}
+
+// htmlWebpackPlugin 設定
+function htmlWebpackPluginSetting() {
+  let htmlWebpackPluginList = []
+  const enableHtmlWebpackHarddiskPlugin = true
+
+  htmlWebpackPluginList.push(
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: path.resolve(__dirname, 'ClientApp/indexTemplate.html'),
+      filename: path.resolve(__dirname, 'index.html'),
+      chunks: ['index'],
+      // 跳過那些模塊
+      // excludeChunks: [],
+      HtmlWebpackPluginOverride: true,
+      // hash:true,//防止缓存
+      outputFile: {
+        vendor: 'wwwroot/vendor/dll.vendor.js',
+        isProd: false,
+        port: devServerPort
+      },
+      minify: true,
+      // 啟用手動排序
+      chunksSortMode: 'manual'
+      // 跟著HtmlWebpackHarddiskPlugin套件
+      // alwaysWriteToDisk: true
+    })
+  )
+
+  htmlWebpackPluginList.push(
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'ClientApp/ejs/index_2/index_2.ejs'),
+      filename: path.resolve(__dirname, 'index_2.html'),
+      chunks: ['index'],
+      HtmlWebpackPluginOverride: true,
+      // hash:true,//防止缓存
+      outputFile: {
+        vendor: 'wwwroot/vendor/dll.vendor.js',
+        isProd: false,
+        port: devServerPort
+      },
+      minify: true,
+      // 啟用手動排序
+      chunksSortMode: 'manual'
+      // 跟著HtmlWebpackHarddiskPlugin套件
+      // alwaysWriteToDisk: true
+    })
+  )
+
+  if (enableHtmlWebpackHarddiskPlugin) {
+    for (let index = 0; index < htmlWebpackPluginList.length; index++) {
+      let element = htmlWebpackPluginList[index]
+      element.alwaysWriteToDisk = true
+    }
+
+    //強制"HtmlWebpackPlugin"進行編譯成實體檔案
+    htmlWebpackPluginList.push(new HtmlWebpackHarddiskPlugin())
+  }
+
+  return htmlWebpackPluginList
 }
