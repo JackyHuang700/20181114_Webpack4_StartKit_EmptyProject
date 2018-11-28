@@ -12,7 +12,7 @@
       <% } %>
     <% } %>
 
-<%= require('./header.ejs')() %>
+<%= require('./public/header.ejs')() %>
   <!-- Here is our page's main content -->
   <main>
     <!-- It contains an article -->
@@ -43,6 +43,6 @@
   <script src="http://localhost:<%= htmlWebpackPlugin.options.outputFile.port %><%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
   <% } %> <% } %>
 
-<%= require('./footer.ejs')() %>
+<%= require('./public/footer.ejs')() %>
 </body>
 </html>
