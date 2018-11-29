@@ -223,7 +223,7 @@ function htmlWebpackPluginSetting() {
   if (enableHtmlWebpackHarddiskPlugin) {
     for (let index = 0; index < htmlWebpackPluginList.length; index++) {
       let element = htmlWebpackPluginList[index]
-      element.alwaysWriteToDisk = true
+      element.options.alwaysWriteToDisk = true
     }
 
     //強制"HtmlWebpackPlugin"進行編譯成實體檔案
