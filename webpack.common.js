@@ -46,7 +46,6 @@ module.exports = {
       {
         test: /\.ejs$/,
         use: 'ejs-compiled-loader'
-        // use: 'ejs-loader?variable=data'
       },
       {
         // 使用 ts-loader 时，设置 happyPackMode: true / transpileOnly: true
@@ -221,6 +220,7 @@ function htmlWebpackPluginSetting() {
   )
 
   if (enableHtmlWebpackHarddiskPlugin) {
+    
     for (let index = 0; index < htmlWebpackPluginList.length; index++) {
       let element = htmlWebpackPluginList[index]
       element.options.alwaysWriteToDisk = true
