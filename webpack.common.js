@@ -201,6 +201,7 @@ function htmlWebpackPluginSetting() {
 
   htmlWebpackPluginList.push(
     new HtmlWebpackPlugin({
+      inject: false,
       template: path.resolve(__dirname, 'ClientApp/ejs/index_2/index_2.ejs'),
       filename: path.resolve(__dirname, 'index_2.html'),
       chunks: ['index'],
