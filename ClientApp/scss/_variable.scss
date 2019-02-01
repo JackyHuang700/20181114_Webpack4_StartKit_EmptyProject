@@ -1,0 +1,23 @@
+
+// open normalize
+$openNormalize: false;
+
+// Grid breakpoints, Responsive breakpoints in Bootstrap4
+$mq576: 576px; // Extra small = xs
+$mq768: 768px; // Small = sm
+$mq992: 992px; // Medium = md
+$mq1200: 1200px; // large = lg
+$mq120001: 1200.01px; // Extra large = xl
+
+
+// $grid-breakpoints: (
+//   xs: 0,
+//   sm: 576px,
+//   md: 768px,
+//   lg: 992px,
+//   xl: 1200px
+// ) !default;
+
+//
+$themeBGColor: whitesmoke;
+$themeColor: #333;

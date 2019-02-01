@@ -1,0 +1,67 @@
+// 預設字型
+@font-face {
+  font-family: "Noto Sans TC-Light";
+  font-style: normal;
+  font-weight: 300;
+  src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Light.woff2)
+      format("woff2"),
+    url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Light.woff)
+      format("woff"),
+    url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Light.otf)
+      format("opentype");
+}
+:not(i):not(span) {
+  font-family: Noto Sans TC-Light !important;
+}
+
+// reset
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
+// RWD template
+#app {
+  // xl
+  color: $themeColor;
+  background-color: $themeBGColor;
+
+  @media screen and (max-width: $mq1200) {
+  }
+  @media screen and (max-width: $mq992) {
+  }
+  @media screen and (max-width: $mq768) {
+  }
+  @media screen and (max-width: $mq576) {
+  }
+
+  // IE11 +
+  @media all and (-ms-high-contrast: none) {
+  }
+
+  // IE10 +
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  }
+
+  // only IE10
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  }
+
+  // only Edge
+  @supports (-ms-ime-align: auto) {
+  }
+
+  // print
+  @media print{
+
+  }
+
+}

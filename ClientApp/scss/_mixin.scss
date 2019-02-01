@@ -1,0 +1,22 @@
+@mixin img{
+
+  max-width: 100%;
+
+  > img{
+    width: 100%;
+  }
+}
+
+
+// if else template
+@mixin template($model: 1){
+  @if $model == 1{
+    background-color: #fff;
+  }
+  @else if $model == 2 {
+    background-color: #eee;
+  }
+  @else{
+    background-color: #ddd;
+  }
+}
