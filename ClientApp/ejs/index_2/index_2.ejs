@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Document</title>
-  </head>
+  <%- include ClientApp/ejs/index_2/public/globalHead.ejs %>  
   <body>
+    <%- include ClientApp/ejs/index_2/public/globalStyle.ejs %>  
+
     <%if (htmlWebpackPlugin.options.outputFile.isProd) {%> <% for (var css in
     htmlWebpackPlugin.files.css) { %>
     <link
@@ -61,6 +60,11 @@
       </article>
     </main>
 
+    <!-- path是相對於運行webpack的位置 -->
+    <%- include ClientApp/ejs/index_2/public/footer.ejs %>
+
+    <%- include ClientApp/ejs/index_2/public/globalScript.ejs %> 
+
     <script src="<%= htmlWebpackPlugin.options.outputFile.vendor %>"></script>
 
     <%if (htmlWebpackPlugin.options.outputFile.isProd) {%> <% for (var chunk in
@@ -71,7 +75,5 @@
     <script src="http://localhost:<%= htmlWebpackPlugin.options.outputFile.port %><%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
     <% } %> <% } %>
 
-    <!-- path是相對於運行webpack的位置 -->
-    <%- include ClientApp/ejs/index_2/public/footer.ejs %>
   </body>
 </html>

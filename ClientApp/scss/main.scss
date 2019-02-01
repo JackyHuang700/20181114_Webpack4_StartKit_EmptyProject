@@ -1,5 +1,31 @@
-$color: #faa;
+// Responsive breakpoints in Bootstrap4
+$mq576: 576px; // Extra small = xs
+$mq768: 768px; // Small = sm
+$mq992: 992px; // Medium = md
+$mq1200: 1200px; // large = lg
+$mq120001: 1200.01px; // Extra large = xl
 
-#app{
+//
+$teamplateBGColor: #bdcbe5;
+$color: #333;
+
+
+@font-face {
+  font-family: "Noto Sans TC-Light";
+  font-style: normal;
+  font-weight: 300;
+  src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Light.woff2)
+      format("woff2"),
+    url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Light.woff)
+      format("woff"),
+    url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Light.otf)
+      format("opentype");
+}
+:not(i):not(span) {
+  font-family: Noto Sans TC-Light !important;
+}
+
+#app {
   color: $color;
+  background-color: $teamplateBGColor;
 }
