@@ -6,10 +6,10 @@ $mq1200: 1200px; // large = lg
 $mq120001: 1200.01px; // Extra large = xl
 
 //
-$teamplateBGColor: #bdcbe5;
-$color: #333;
+$teamplateBGColor: whitesmoke;
+$templatecolor: #333;
 
-
+// 預設字型
 @font-face {
   font-family: "Noto Sans TC-Light";
   font-style: normal;
@@ -25,7 +25,88 @@ $color: #333;
   font-family: Noto Sans TC-Light !important;
 }
 
+// reset
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  height: 100%;
+}
+body{
+  min-height: 100%;
+}
+
+// RWD template
 #app {
-  color: $color;
+  // xl
+  color: $templatecolor;
   background-color: $teamplateBGColor;
+
+  @media screen and (max-width: $mq1200){
+
+  }
+  @media screen and (max-width: $mq992){
+
+  }
+  @media screen and (max-width: $mq768){
+
+  }
+  @media screen and (max-width: $mq576){
+
+  }
+ 
+  // IE11 +
+  @media all and (-ms-high-contrast:none){ 
+    
+  }
+
+  // IE10 +
+  @media all and (-ms-high-contrast:none){
+    
+  }
+  
+  // only IE10
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { 
+    
+  } 
+
+  // only Edge
+  @supports (-ms-ime-align:auto) {
+  
+  }
+}
+
+
+// 單位
+// template color
+.tColor.tColor.tColor{
+  color: $templatecolor !important;
+}
+
+//  template background color
+.tBGColor{
+  background-color: $teamplateBGColor !important;
+}
+
+.o-6.o-6{
+  opacity: .6;
+}
+
+.fz-19x{
+  font-size: 19px;
+}
+.fz-17x{
+  font-size: 17px;
+}
+.fz-18x{
+  font-size: 18px;
+}
+.fz-27x{
+  font-size: 27px;
+}
+
+.mb-40x.mb-40x{
+  margin-bottom: 40px;
 }
