@@ -61,26 +61,89 @@ module.exports = {
       })
     )
 
-    htmlWebpackPluginList.push(
-      new HtmlWebpackPlugin({
-        inject: false,
-        template: path.resolve(__dirname, 'ClientApp/ejs/index_2/index_2.ejs'),
-        filename: path.resolve(__dirname, 'index_2.html'),
-        chunks: ['index'],
-        HtmlWebpackPluginOverride: true,
-        // hash:true,//防止缓存
-        outputFile: {
-          vendor: 'wwwroot/vendor/dll.vendor.js',
-          isProd: isProd,
-          port: module.exports.devServerPort,
+    // ejs - add single
+    const openSingleEjsFIle = false
+    if (openSingleEjsFIle) {
+      htmlWebpackPluginList.push(
+        new HtmlWebpackPlugin({
+          inject: false,
+          template: path.resolve(__dirname, 'ClientApp/ejs/index_2/index_2.ejs'),
+          filename: path.resolve(__dirname, 'index_2.html'),
+          chunks: ['index'],
+          HtmlWebpackPluginOverride: true,
+          // hash:true,//防止缓存
+          outputFile: {
+            vendor: 'wwwroot/vendor/dll.vendor.js',
+            isProd: isProd,
+            port: module.exports.devServerPort,
+          },
+          minify: minify,
+          // 啟用手動排序
+          chunksSortMode: 'manual'
+          // 跟著HtmlWebpackHarddiskPlugin套件
+          // alwaysWriteToDisk: true
+        })
+      )
+    }
+  
+
+    // ejs - add mulit
+    const openMulitEjsFile = true
+    if (openMulitEjsFile) {
+      const htmlWebpackPluginListData = [
+        {
+          template: path.resolve(__dirname, 'ClientApp/ejs/index_2/index_2.ejs'),
+          filename: path.resolve(__dirname, 'index.html'),
         },
-        minify: minify,
-        // 啟用手動排序
-        chunksSortMode: 'manual'
-        // 跟著HtmlWebpackHarddiskPlugin套件
-        // alwaysWriteToDisk: true
-      })
-    )
+      ]
+
+       // setting HtmlWebpackPlugin param
+      let minify
+      let isProd
+
+      switch (mode) {
+        case module.exports.modeDevelopment:
+          minify = false
+          isProd = false
+          break;
+          case module.exports.modeProduction:
+          minify = {
+            removeComments: true,
+            collapseWhitespace:true,
+            collapseInlineTagWhitespace:true
+          }
+          isProd = true
+          break;
+        default:
+          break;
+      }
+
+      // common setting
+      for (let index = 0; index < htmlWebpackPluginListData.length; index++) {
+        const element = htmlWebpackPluginListData[index]
+        
+        htmlWebpackPluginList.push(
+          new HtmlWebpackPlugin({
+            inject: false,
+            template: element.template,
+            filename: element.filename,
+            chunks: ['index'],
+            HtmlWebpackPluginOverride: true,
+            // hash:true,//防止缓存
+            outputFile: {
+              vendor: 'wwwroot/vendor/dll.vendor.js',
+              isProd: isProd,
+              port: module.exports.devServerPort
+            },
+            minify: minify,
+            // 啟用手動排序
+            chunksSortMode: 'manual'
+            // 跟著HtmlWebpackHarddiskPlugin套件
+            // alwaysWriteToDisk: true
+          })
+        )
+      }
+    }
 
     if (enableHtmlWebpackHarddiskPlugin) {
       
