@@ -156,6 +156,11 @@ module.exports = {
         from: path.resolve(__dirname, `ClientApp/cpoyVendor/`),
         to: path.resolve(__dirname, `wwwroot/cpoyVendor/cpoyVendorTwo`),
         toType: 'dir'
+      },
+      {
+        from: path.resolve(__dirname, `ClientApp/images`),
+        to: path.resolve(__dirname, `wwwroot/images`),
+        toType: 'dir'
       }
     ])
     // new webpack.ProvidePlugin({
