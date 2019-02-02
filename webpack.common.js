@@ -143,18 +143,18 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, `ClientApp/cpoyVendor/aa/testa.js`),
-        to: path.resolve(__dirname, `wwwroot/cpoyVendor`),
+        from: path.resolve(__dirname, `ClientApp/lib/aa/testa.js`),
+        to: path.resolve(__dirname, `wwwroot/lib`),
         toType: 'dir'
       },
       {
-        from: path.resolve(__dirname, `ClientApp/cpoyVendor/bb/testb.js`),
-        to: path.resolve(__dirname, `wwwroot/cpoyVendor`),
+        from: path.resolve(__dirname, `ClientApp/lib/bb/testb.js`),
+        to: path.resolve(__dirname, `wwwroot/lib`),
         toType: 'dir'
       },
       {
-        from: path.resolve(__dirname, `ClientApp/cpoyVendor/`),
-        to: path.resolve(__dirname, `wwwroot/cpoyVendor/cpoyVendorTwo`),
+        from: path.resolve(__dirname, `ClientApp/lib/`),
+        to: path.resolve(__dirname, `wwwroot/lib/libTwo`),
         toType: 'dir'
       },
       {
