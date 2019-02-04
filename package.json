@@ -10,6 +10,7 @@
     "dev:server": "webpack-dashboard -- webpack-dev-server --config webpack.dev.js",
     "dev:middle": "webpack-dashboard -- node server.js",
     "prod": "webpack --config webpack.prod.js",
+    "prod:analyze": "webpack --config webpack.prodAnalyze.js",
     "help": "webpack --help",
     "jsonServer": "node ./JsonServer/server.js"
   },

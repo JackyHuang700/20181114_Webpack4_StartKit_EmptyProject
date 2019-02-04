@@ -152,11 +152,13 @@ module.exports = {
         to: path.resolve(__dirname, `wwwroot/lib`),
         toType: 'dir'
       },
+      // lib
       {
         from: path.resolve(__dirname, `ClientApp/lib/`),
         to: path.resolve(__dirname, `wwwroot/lib/libTwo`),
         toType: 'dir'
       },
+      // images
       {
         from: path.resolve(__dirname, `ClientApp/images`),
         to: path.resolve(__dirname, `wwwroot/images`),
