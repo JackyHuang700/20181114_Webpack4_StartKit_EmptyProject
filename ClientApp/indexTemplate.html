@@ -10,7 +10,7 @@
   
     <%if (htmlWebpackPlugin.options.outputFile.isProd) {%> 
       <% for (var css in htmlWebpackPlugin.files.css) { %>
-        <link href="wwwroot/webpackTest<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+        <link href="wwwroot/dist<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
       <% } %>
     <% } %>
 
@@ -19,7 +19,7 @@
     <script src="<%= htmlWebpackPlugin.options.outputFile.vendor %>"></script>
 
     <%if (htmlWebpackPlugin.options.outputFile.isProd) {%> <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-    <script src="wwwroot/webpackTest<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <script src="wwwroot/dist<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
     <% } %> <%} else {%> <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
     <script src="http://localhost:<%= htmlWebpackPlugin.options.outputFile.port %><%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
     <% } %> <% } %>

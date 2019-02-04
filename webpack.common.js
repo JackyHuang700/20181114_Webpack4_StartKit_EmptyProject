@@ -25,7 +25,8 @@ module.exports = {
   },
   output: {
     publicPath: '/',
-    path: path.resolve(__dirname, 'wwwroot/webpackTest'),
+    // path: path.resolve(__dirname, 'wwwroot/webpackTest'),
+    path: path.resolve(__dirname, 'wwwroot/dist'),
     chunkFilename: '[name].bundle.js'
   },
   module: {
@@ -82,7 +83,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['wwwroot/webpackTest']),
+    // new CleanWebpackPlugin(['wwwroot/webpackTest']),
+    new CleanWebpackPlugin(['wwwroot/dist']),
     new HappyPack({
       id: 'babelJs',
       threadPool: HappyPack.ThreadPool({ size: osCpusLength }),
@@ -99,6 +101,30 @@ module.exports = {
         }
       ]
     }),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, `ClientApp/lib/aa/testa.js`),
+        to: path.resolve(__dirname, `wwwroot/dist/lib`),
+        toType: 'dir'
+      },
+      {
+        from: path.resolve(__dirname, `ClientApp/lib/bb/testb.js`),
+        to: path.resolve(__dirname, `wwwroot/dist/lib`),
+        toType: 'dir'
+      },
+      // lib
+      {
+        from: path.resolve(__dirname, `ClientApp/lib/`),
+        to: path.resolve(__dirname, `wwwroot/dist/lib/libTwo`),
+        toType: 'dir'
+      },
+      // images
+      {
+        from: path.resolve(__dirname, `ClientApp/images`),
+        to: path.resolve(__dirname, `wwwroot/dist/images`),
+        toType: 'dir'
+      }
+    ]),
     // new HtmlWebpackPlugin({
     //   inject: false,
     //   template: path.resolve(__dirname, 'ClientApp/indexTemplate.html'),
@@ -141,30 +167,7 @@ module.exports = {
     new webpack.DllReferencePlugin({
       manifest: require('./wwwroot/vendor/vendor.manifest.json')
     }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, `ClientApp/lib/aa/testa.js`),
-        to: path.resolve(__dirname, `wwwroot/lib`),
-        toType: 'dir'
-      },
-      {
-        from: path.resolve(__dirname, `ClientApp/lib/bb/testb.js`),
-        to: path.resolve(__dirname, `wwwroot/lib`),
-        toType: 'dir'
-      },
-      // lib
-      {
-        from: path.resolve(__dirname, `ClientApp/lib/`),
-        to: path.resolve(__dirname, `wwwroot/lib/libTwo`),
-        toType: 'dir'
-      },
-      // images
-      {
-        from: path.resolve(__dirname, `ClientApp/images`),
-        to: path.resolve(__dirname, `wwwroot/images`),
-        toType: 'dir'
-      }
-    ])
+
     // new webpack.ProvidePlugin({
     //   _: 'lodash' //所有页面都会引入 _ 这个变量，不用再import引入
     //   $: "jquery",

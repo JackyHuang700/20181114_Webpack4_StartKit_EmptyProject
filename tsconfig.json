@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./wwwroot/webpackTest/",
+    "outDir": "./wwwroot/dist/",
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "es6",
