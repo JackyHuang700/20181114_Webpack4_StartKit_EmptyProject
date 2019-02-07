@@ -157,6 +157,28 @@ module.exports = {
     }
 
     return htmlWebpackPluginList
-  }
+  },
+  // 設定 CleanWebpackPlugin
+  cleanWebpackPlugin: function (mode){
+    let clearFolderArray = []
 
+    // 兩個都有
+    clearFolderArray.push('wwwroot/dist')
+
+    switch (mode) {
+      case module.exports.modeDevelopment:
+
+        break;
+      case module.exports.modeProduction:
+        clearFolderArray.push('wwwroot/lib')
+        clearFolderArray.push('wwwroot/images')
+        break;
+    
+      default:
+        break;
+    }
+
+
+    return clearFolderArray
+  }
 }

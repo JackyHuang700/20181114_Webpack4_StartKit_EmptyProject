@@ -83,8 +83,34 @@ module.exports = {
     ]
   },
   plugins: [
-    // new CleanWebpackPlugin(['wwwroot/webpackTest']),
-    new CleanWebpackPlugin(['wwwroot/dist']),
+
+    // CopyWebpackPlugin，在dev server底下不會進行動作
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, `ClientApp/lib/aa/testa.js`),
+        to: path.resolve(__dirname, `wwwroot/lib`),
+        toType: 'dir'
+      },
+      {
+        from: path.resolve(__dirname, `ClientApp/lib/bb/testb.js`),
+        to: path.resolve(__dirname, `wwwroot/lib`),
+        toType: 'dir'
+      },
+      // lib
+      {
+        from: path.resolve(__dirname, `ClientApp/lib/`),
+        to: path.resolve(__dirname, `wwwroot/lib/libTwo`),
+        toType: 'dir'
+      },
+      // images
+      {
+        from: path.resolve(__dirname, `ClientApp/images`),
+        to: path.resolve(__dirname, `wwwroot/images`),
+        toType: 'dir'
+      }
+    ],{
+      copyUnmodified: true, 
+    }),
     new HappyPack({
       id: 'babelJs',
       threadPool: HappyPack.ThreadPool({ size: osCpusLength }),
@@ -101,30 +127,7 @@ module.exports = {
         }
       ]
     }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, `ClientApp/lib/aa/testa.js`),
-        to: path.resolve(__dirname, `wwwroot/dist/lib`),
-        toType: 'dir'
-      },
-      {
-        from: path.resolve(__dirname, `ClientApp/lib/bb/testb.js`),
-        to: path.resolve(__dirname, `wwwroot/dist/lib`),
-        toType: 'dir'
-      },
-      // lib
-      {
-        from: path.resolve(__dirname, `ClientApp/lib/`),
-        to: path.resolve(__dirname, `wwwroot/dist/lib/libTwo`),
-        toType: 'dir'
-      },
-      // images
-      {
-        from: path.resolve(__dirname, `ClientApp/images`),
-        to: path.resolve(__dirname, `wwwroot/dist/images`),
-        toType: 'dir'
-      }
-    ]),
+
     // new HtmlWebpackPlugin({
     //   inject: false,
     //   template: path.resolve(__dirname, 'ClientApp/indexTemplate.html'),

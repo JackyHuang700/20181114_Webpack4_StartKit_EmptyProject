@@ -11,8 +11,10 @@ const {
   modeDevelopment,
   devServerPort,
   devServerProxyTarget,
-  htmlWebpackPluginSetting
+  htmlWebpackPluginSetting,
+  cleanWebpackPlugin
 } = require('./webpack.define.js')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = merge(common, {
   // 模式
@@ -58,6 +60,8 @@ module.exports = merge(common, {
     }),
     // 这个插件的作用是在热加载时直接返回更新文件名，而不是文件的id。
     new webpack.NamedModulesPlugin(),
+    // new CleanWebpackPlugin(['wwwroot/webpackTest']),
+    new CleanWebpackPlugin(cleanWebpackPlugin(modeDevelopment)),
   ].concat(htmlWebpackPluginSetting(devServerPort)),
   // devtool: 'inline-source-map',
   devtool: 'cheap-module-eval-source-map',

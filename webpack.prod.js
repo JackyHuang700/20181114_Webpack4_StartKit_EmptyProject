@@ -6,13 +6,16 @@ const {
   commonInclude,
   commonExclude,
   modeProduction,
-  htmlWebpackPluginSetting
+  htmlWebpackPluginSetting,
+  cleanWebpackPlugin
 } = require('./webpack.define.js')
 const common = require('./webpack.common.js')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // 请只在生产环境下使用 CSS 提取，这将便于你在开发环境下进行热重载。
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+
 
 // console.log(`bbbbbbbbbbbb: ${process.env.NODE_ENV}`)\
 
@@ -122,6 +125,7 @@ module.exports = merge(common, {
     new webpack.optimize.ModuleConcatenationPlugin(),
     // 在编译出现错误时，使用 NoEmitOnErrorsPlugin 来跳过输出阶段。这样可以确保输出资源不会包含错误。对于所有资源，统计资料(stat)的 emitted 标识都是 false
     new webpack.NoEmitOnErrorsPlugin(),
+    new CleanWebpackPlugin(cleanWebpackPlugin(modeProduction)),
   ].concat(htmlWebpackPluginSetting(modeProduction)),
   optimization: {
     minimizer: [
