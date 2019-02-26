@@ -3,7 +3,7 @@ import '../scss/all.scss'
 import '../css/styles.css'
 import {
   cube,
-  square
+  square,
 } from './multiFunc'
 // 在dll內的套件
 var _ = require('lodash')
