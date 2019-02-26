@@ -5,7 +5,7 @@ import {
 } from './multiFunc'
 import '../css/styles.css'
 
-console.log('index2');
+console.log('index2')
 console.log(cube(5))
 console.log(square(51))
 
