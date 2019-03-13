@@ -16,7 +16,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
-
 // console.log(`bbbbbbbbbbbb: ${process.env.NODE_ENV}`)\
 
 module.exports = merge(common, {
@@ -26,7 +25,7 @@ module.exports = merge(common, {
     filename: '[name].bundle.[hash:8].js'
   },
   devtool: 'source-map',
-   // 给定一个创建后超过 250kb 的资源， webpack 抛出一个错误或警告
+  // 给定一个创建后超过 250kb 的资源， webpack 抛出一个错误或警告
   performance: {
     // hints: 'warning'
   },
@@ -43,7 +42,7 @@ module.exports = merge(common, {
             loader: 'postcss-loader',
             options: {
               plugins: [
-                require('autoprefixer')('last 100 versions') /*在这里添加*/
+                require('autoprefixer')('last 100 versions') /* 在这里添加 */
               ]
             }
           }
@@ -66,7 +65,7 @@ module.exports = merge(common, {
             loader: 'postcss-loader',
             options: {
               plugins: [
-                require('autoprefixer')('last 100 versions') /*在这里添加*/
+                require('autoprefixer')('last 100 versions') /* 在这里添加 */
               ]
             }
           },
@@ -125,7 +124,7 @@ module.exports = merge(common, {
     new webpack.optimize.ModuleConcatenationPlugin(),
     // 在编译出现错误时，使用 NoEmitOnErrorsPlugin 来跳过输出阶段。这样可以确保输出资源不会包含错误。对于所有资源，统计资料(stat)的 emitted 标识都是 false
     new webpack.NoEmitOnErrorsPlugin(),
-    new CleanWebpackPlugin(cleanWebpackPlugin(modeProduction)),
+    new CleanWebpackPlugin(cleanWebpackPlugin(modeProduction))
   ].concat(htmlWebpackPluginSetting(modeProduction)),
   optimization: {
     minimizer: [
@@ -142,7 +141,7 @@ module.exports = merge(common, {
             reduce_vars: true // 提取出出现多次但是没有定义成变量去引用的静态值
           }
         }
-      }),
+      })
     ]
   }
 })

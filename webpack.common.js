@@ -32,6 +32,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.pug$/,
+        include: [commonInclude],
+        exclude: [commonExclude],
+        use: [
+          'html-loader',
+          'pug-html-loader'
+        ]
+      },
+      {
         test: /\.js$/,
         include: [commonInclude],
         exclude: [commonExclude],
@@ -108,8 +117,8 @@ module.exports = {
         to: path.resolve(__dirname, `wwwroot/images`),
         toType: 'dir'
       }
-    ],{
-      copyUnmodified: true, 
+    ], {
+      copyUnmodified: true
     }),
     new HappyPack({
       id: 'babelJs',
@@ -169,7 +178,7 @@ module.exports = {
     // new HtmlWebpackHarddiskPlugin(),
     new webpack.DllReferencePlugin({
       manifest: require('./wwwroot/vendor/vendor.manifest.json')
-    }),
+    })
 
     // new webpack.ProvidePlugin({
     //   _: 'lodash' //所有页面都会引入 _ 这个变量，不用再import引入

@@ -40,11 +40,11 @@ module.exports = merge(common, {
       {
         test: /\.scss$/,
         use: [{
-            loader: "style-loader" // 将 JS 字符串生成为 style 节点
+          loader: 'style-loader' // 将 JS 字符串生成为 style 节点
         }, {
-            loader: "css-loader" // 将 CSS 转化成 CommonJS 模块
+          loader: 'css-loader' // 将 CSS 转化成 CommonJS 模块
         }, {
-            loader: "sass-loader" // 将 Sass 编译成 CSS
+          loader: 'sass-loader' // 将 Sass 编译成 CSS
         }]
       }
     ]
@@ -61,7 +61,7 @@ module.exports = merge(common, {
     // 这个插件的作用是在热加载时直接返回更新文件名，而不是文件的id。
     new webpack.NamedModulesPlugin(),
     // new CleanWebpackPlugin(['wwwroot/webpackTest']),
-    new CleanWebpackPlugin(cleanWebpackPlugin(modeDevelopment)),
+    new CleanWebpackPlugin(cleanWebpackPlugin(modeDevelopment))
   ].concat(htmlWebpackPluginSetting(devServerPort)),
   // devtool: 'inline-source-map',
   devtool: 'cheap-module-eval-source-map',
@@ -99,22 +99,22 @@ module.exports = merge(common, {
     open: true,
     host: 'localhost',
     // 服务器返回浏览器的时候是否启动gzip压缩
-    compress: false, 
+    compress: false,
     // index: 'index.html'
     // openPage: '/different/page',
     // 告知服务器，观察 devServer.contentBase 下的文件。文件修改后，会触发一次完整的页面重载
-    watchContentBase: true,
+    watchContentBase: true
   },
   watch: true, // 开启监听文件更改，自动刷新
   watchOptions: {
-      ignored: ['node_modules'], //忽略不用监听变更的目录
-      aggregateTimeout: 500, //防止重复保存频繁重新编译,500毫米内重复保存不打包
-      poll:1000 //每秒询问的文件变更的次数
+    ignored: ['node_modules'], // 忽略不用监听变更的目录
+    aggregateTimeout: 500, // 防止重复保存频繁重新编译,500毫米内重复保存不打包
+    poll: 1000 // 每秒询问的文件变更的次数
   }
 })
 
 // 添加HMR伺服器
-function getNewCommonEntry(common) {
+function getNewCommonEntry (common) {
   const { entry } = common
   const commonEntry = JSON.parse(JSON.stringify(entry))
   let newCommonEntry = {}

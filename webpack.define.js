@@ -17,26 +17,26 @@ module.exports = {
     let htmlWebpackPluginList = []
     const enableHtmlWebpackHarddiskPlugin = true
 
-      // setting HtmlWebpackPlugin param
-      let minify
-      let isProd
-  
-      switch (mode) {
-        case module.exports.modeDevelopment:
-          minify = false
-          isProd = false
-          break;
-          case module.exports.modeProduction:
-          minify = {
-            removeComments: true,
-            collapseWhitespace:true,
-            collapseInlineTagWhitespace:true
-          }
-          isProd = true
-          break;
-        default:
-          break;
-      }
+    // setting HtmlWebpackPlugin param
+    let minify
+    let isProd
+
+    switch (mode) {
+      case module.exports.modeDevelopment:
+        minify = false
+        isProd = false
+        break
+      case module.exports.modeProduction:
+        minify = {
+          removeComments: true,
+          collapseWhitespace: true,
+          collapseInlineTagWhitespace: true
+        }
+        isProd = true
+        break
+      default:
+        break
+    }
 
     htmlWebpackPluginList.push(
       new HtmlWebpackPlugin({
@@ -51,7 +51,7 @@ module.exports = {
         outputFile: {
           vendor: 'wwwroot/vendor/dll.vendor.js',
           isProd: isProd,
-          port: module.exports.devServerPort,
+          port: module.exports.devServerPort
         },
         minify: minify,
         // 啟用手動排序
@@ -75,7 +75,7 @@ module.exports = {
           outputFile: {
             vendor: 'wwwroot/vendor/dll.vendor.js',
             isProd: isProd,
-            port: module.exports.devServerPort,
+            port: module.exports.devServerPort
           },
           minify: minify,
           // 啟用手動排序
@@ -85,7 +85,6 @@ module.exports = {
         })
       )
     }
-  
 
     // ejs - add mulit
     const openMulitEjsFile = true
@@ -93,11 +92,11 @@ module.exports = {
       const htmlWebpackPluginListData = [
         {
           template: path.resolve(__dirname, 'ClientApp/ejs/index_2/index_2.ejs'),
-          filename: path.resolve(__dirname, 'index.html'),
-        },
+          filename: path.resolve(__dirname, 'index.html')
+        }
       ]
 
-       // setting HtmlWebpackPlugin param
+      // setting HtmlWebpackPlugin param
       let minify
       let isProd
 
@@ -105,23 +104,23 @@ module.exports = {
         case module.exports.modeDevelopment:
           minify = false
           isProd = false
-          break;
-          case module.exports.modeProduction:
+          break
+        case module.exports.modeProduction:
           minify = {
             removeComments: true,
-            collapseWhitespace:true,
-            collapseInlineTagWhitespace:true
+            collapseWhitespace: true,
+            collapseInlineTagWhitespace: true
           }
           isProd = true
-          break;
+          break
         default:
-          break;
+          break
       }
 
       // common setting
       for (let index = 0; index < htmlWebpackPluginListData.length; index++) {
         const element = htmlWebpackPluginListData[index]
-        
+
         htmlWebpackPluginList.push(
           new HtmlWebpackPlugin({
             inject: false,
@@ -145,21 +144,42 @@ module.exports = {
       }
     }
 
+    // -- setting pug --
+    htmlWebpackPluginList.push(
+      new HtmlWebpackPlugin({
+        inject: false,
+        template: path.resolve(__dirname, 'ClientApp/pug/indexPug.pug'),
+        filename: path.resolve(__dirname, 'indexPug.html'),
+        chunks: ['index'],
+        HtmlWebpackPluginOverride: true,
+        // hash:true,//防止缓存
+        outputFile: {
+          vendor: 'wwwroot/vendor/dll.vendor.js',
+          isProd: isProd,
+          port: module.exports.devServerPort
+        },
+        minify: minify,
+        // 啟用手動排序
+        chunksSortMode: 'manual',
+        // 跟著HtmlWebpackHarddiskPlugin套件
+        alwaysWriteToDisk: true
+      })
+    )
+
     if (enableHtmlWebpackHarddiskPlugin) {
-      
       for (let index = 0; index < htmlWebpackPluginList.length; index++) {
         let element = htmlWebpackPluginList[index]
         element.options.alwaysWriteToDisk = true
       }
 
-      //強制"HtmlWebpackPlugin"進行編譯成實體檔案
+      // 強制"HtmlWebpackPlugin"進行編譯成實體檔案
       htmlWebpackPluginList.push(new HtmlWebpackHarddiskPlugin())
     }
 
     return htmlWebpackPluginList
   },
   // 設定 CleanWebpackPlugin
-  cleanWebpackPlugin: function (mode){
+  cleanWebpackPlugin: function (mode) {
     let clearFolderArray = []
 
     // 兩個都有
@@ -168,16 +188,15 @@ module.exports = {
     switch (mode) {
       case module.exports.modeDevelopment:
 
-        break;
+        break
       case module.exports.modeProduction:
         clearFolderArray.push('wwwroot/lib')
         clearFolderArray.push('wwwroot/images')
-        break;
-    
-      default:
-        break;
-    }
+        break
 
+      default:
+        break
+    }
 
     return clearFolderArray
   }
